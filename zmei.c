@@ -31,7 +31,7 @@ int main(void)
 	mvaddch(LINES/2,COLS/2,'*');
 	while((ch = getch()) != 'q')
 	{
-
+		
 		if(ch == KEY_UP)
 		{
 			y--;
@@ -57,16 +57,20 @@ int main(void)
 			x++;
 			mvaddch(y,x,'*');
 		}
-		for(int i = 0; i < 4;i++)
+
+		
+			for(int i = 0; i < 4;i++)
 				{
 					mass[i].digit++;
-					if(mass[i].digit == 4)
+					if(mass[i].digit == 4 )
 					{
+						if(x != mass[i].x || y != mass[i].y)
 						mvaddch(mass[i].y,mass[i].x,' ');
 						mass[i].x = x;
 						mass[i].y = y;
 						mass[i].digit = 0;
 					}
+					
 				}
 
 	}
