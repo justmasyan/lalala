@@ -36,9 +36,45 @@ int main(void)
 	mvaddch(LINES/2,COLS/2,'*');
 	while((ch = getch()) != 'q')
 	{
-		if((ch == KEY_UP && oper == 'd') || (ch == KEY_DOWN && oper == 'u') || (ch == KEY_RIGHT && oper == 'l') || (ch == KEY_LEFT && oper == 'r'))
+		if((ch == KEY_UP && oper == 'd') || (ch == KEY_DOWN && oper == 'u') || (ch == KEY_RIGHT && oper == 'l') || (ch == KEY_LEFT && oper == 'r')) //Dvizhenie nazad
 		{
-			for(int i = 0; i < 4;i++)
+			for(int i = 0; i < 4;i++)//Iscli4enie nepravilnoi situation
+			{
+				for (int j = 0; j < 4 ;j++)
+				{
+					if(mass[i].digit == 3 && mass[j].digit == 2)
+					{
+						if(ch == KEY_UP && mass[i].y - 1 == mass[j].y)
+						{
+							count++;
+							break;
+						}
+						if(ch == KEY_DOWN && mass[i].y + 1 == mass[j].y)
+						{
+							count++;
+							break;
+						}
+						if(ch == KEY_RIGHT && mass[i].x + 1 == mass[j].x)
+						{
+							count++;
+							break;
+						}
+						if(ch == KEY_LEFT && mass[i].x - 1 == mass[j].x)
+						{
+							count++;
+							break;
+						}
+					}
+				}
+			}
+
+			if (count != 0)
+			{
+				count = 0;
+				continue;
+			}
+
+			for(int i = 0; i < 4;i++)//povorot zmei,kogda golova stanovitca hvostom i naoborot
 			{
 				for(int j = 0;j < 4;j++)// dve {
 				{
@@ -74,8 +110,7 @@ int main(void)
 	
 		}
 	
-		mvaddstr(0,COLS/2,"           ");	
-		if(ch == KEY_UP)
+		if(ch == KEY_UP) //dvizhenie golovi
 			{
 			y--;
 			mvaddch(y,x,'*');
@@ -104,15 +139,15 @@ int main(void)
 				oper = 'r';
 			}
 
-		for(int i = 0; i < 4;i++)
+		for(int i = 0; i < 4;i++)//dobavlenie k kajdoi 4asti zmei god zhizni
 			{
 					mass[i].digit++;
-					if(mass[i].digit == 4)
+					if(mass[i].digit == 4)// pri 4 godah XBOCT otmiraet
 					{
-						if(x != mass[i].x || y != mass[i].y)
+						if(x != mass[i].x || y != mass[i].y)//Yslovie kogda golova vstaet na mesto XBOCTa
 						mvaddch(mass[i].y,mass[i].x,' ');
 
-						mass[i].x = x;
+						mass[i].x = x;//otrashivanie golovi
 						mass[i].y = y;
 						mass[i].digit = 0;
 					}
