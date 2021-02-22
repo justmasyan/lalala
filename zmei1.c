@@ -144,7 +144,7 @@ int main(void)
 					mass[i].digit++;
 					if(mass[i].digit == 4)// pri 4 godah XBOCT otmiraet
 					{
-						if(x != mass[i].x || y != mass[i].y)//Yslovie kogda golova vstaet na mesto XBOCTa
+						if(x != mass[i].x || y != mass[i].y)//Yslovie kogda golova ne  vstaet na mesto XBOCTa
 						mvaddch(mass[i].y,mass[i].x,' ');
 
 						mass[i].x = x;//otrashivanie golovi
